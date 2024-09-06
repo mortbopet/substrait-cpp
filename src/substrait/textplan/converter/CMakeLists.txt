@@ -4,15 +4,10 @@ include(../../../../third_party/datetime.cmake)
 
 set(TEXTPLAN_SRCS
     InitialPlanProtoVisitor.cpp
-    InitialPlanProtoVisitor.h
     PipelineVisitor.cpp
-    PipelineVisitor.h
     LoadBinary.cpp
-    LoadBinary.h
     SaveBinary.cpp
-    SaveBinary.h
-    ParseBinary.cpp
-    ParseBinary.h)
+    ParseBinary.cpp)
 
 add_library(substrait_base_proto_visitor BasePlanProtoVisitor.cpp
                                          BasePlanProtoVisitor.h)
@@ -26,14 +21,14 @@ target_link_libraries(
   absl::status
   absl::statusor)
 
-add_library(substrait_textplan_converter ${TEXTPLAN_SRCS})
+add_library(substrait_textplan_converter STATIC ${TEXTPLAN_SRCS})
 
 target_link_libraries(
-  substrait_textplan_converter
+  substrait_textplan_converter PUBLIC
   substrait_base_proto_visitor
   substrait_common
   substrait_proto
-  symbol_table
+  substrait::symbol_table
   error_listener
   fmt::fmt-header-only
   absl::status

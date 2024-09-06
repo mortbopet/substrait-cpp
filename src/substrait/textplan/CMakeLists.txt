@@ -4,29 +4,26 @@ add_subdirectory(converter)
 add_subdirectory(parser)
 
 add_library(
-  symbol_table
+  symbol_table STATIC
   Location.cpp
-  Location.h
   PlanPrinterVisitor.cpp
-  PlanPrinterVisitor.h
   StringManipulation.cpp
   StringManipulation.h
   SymbolTable.cpp
-  SymbolTable.h
   SymbolTablePrinter.cpp
-  SymbolTablePrinter.h
-  StructuredSymbolData.h
-  Any.h)
+)
+add_library(substrait::symbol_table ALIAS symbol_table)
 
-add_library(error_listener SubstraitErrorListener.cpp SubstraitErrorListener.h)
 
-add_library(parse_result ParseResult.cpp ParseResult.h)
+add_library(error_listener STATIC SubstraitErrorListener.cpp SubstraitErrorListener.h)
+
+add_library(parse_result STATIC ParseResult.cpp ParseResult.h)
 
 add_dependencies(symbol_table substrait_proto substrait_common absl::strings
                  fmt::fmt-header-only)
 
 target_link_libraries(
-  symbol_table
+  symbol_table PUBLIC
   substrait_base_proto_visitor
   substrait_proto
   substrait_common

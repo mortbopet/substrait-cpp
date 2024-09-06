@@ -5,7 +5,7 @@ include(../../../../third_party/datetime.cmake)
 add_subdirectory(grammar)
 
 add_library(
-  substrait_textplan_loader
+  substrait_textplan_loader STATIC
   SubstraitPlanVisitor.cpp
   SubstraitPlanVisitor.h
   SubstraitPlanPipelineVisitor.cpp
@@ -23,7 +23,7 @@ add_library(
   SubstraitParserErrorListener.cpp)
 
 target_link_libraries(
-  substrait_textplan_loader
+  substrait_textplan_loader PUBLIC
   symbol_table
   error_listener
   substrait_proto
@@ -38,7 +38,7 @@ target_link_libraries(
 
 add_executable(planparser Tool.cpp)
 
-target_link_libraries(planparser substrait_textplan_loader error_listener)
+target_link_libraries(planparser PUBLIC substrait_textplan_loader error_listener)
 
 if(${SUBSTRAIT_CPP_BUILD_TESTING})
   add_subdirectory(tests)

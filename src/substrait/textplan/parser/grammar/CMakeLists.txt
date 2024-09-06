@@ -50,7 +50,7 @@ message(
   STATUS
     "ANTLR4 generated files: ${ANTLR_SubstraitPlanLexer_CXX_OUTPUTS} ${ANTLR_SubstraitPlanParser_CXX_OUTPUTS}"
 )
-add_library(textplan_grammar ${ANTLR_SubstraitPlanLexer_CXX_OUTPUTS}
+add_library(textplan_grammar STATIC ${ANTLR_SubstraitPlanLexer_CXX_OUTPUTS}
                              ${ANTLR_SubstraitPlanParser_CXX_OUTPUTS})
 
 message(STATUS "generated dir:  ${GRAMMAR_DIR}/antlr4cpp_generated_src")
