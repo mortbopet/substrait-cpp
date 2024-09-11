@@ -629,11 +629,11 @@ void InitialPlanProtoVisitor::updateLocalSchema(
   // Revamp the output based on the output mapping if present.
   auto mapping = getOutputMapping(relation);
   if (!mapping.empty()) {
-    if (!relationData->outputFieldReferences.empty()) {
-      errorListener_->addError(
-          "Aggregate relations do not yet support output mapping changes.");
-      return;
-    }
+    // if (!relationData->outputFieldReferences.empty()) {
+    //   errorListener_->addError(
+    //       "Aggregate relations do not yet support output mapping changes.");
+    //   return;
+    // }
     for (auto item : mapping) {
       auto fieldReferenceSize = relationData->fieldReferences.size();
       if (item < fieldReferenceSize) {
